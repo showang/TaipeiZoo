@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">TaipeiZoo</string>
+
+    <string name="btn_retry">Retry</string>
+    <string name="error_init_fail">無法取得資料，請確認網路連是否正常或稍後重試。</string>
+
+    <string name="nav_tab_area_intro">地區導覽</string>
+    <string name="nav_tab_map">園區地圖</string>
+
+    <string name="areaDetail_plantDataTitle">植物資料</string>
+    <string name="areaDetail_emptyPlantText">查無此區植物資料</string>
+    <string name="plantDetail_featuresTitle">功能 ＆ 成效</string>
+    <string name="plantDetail_pageCountText">%1$d/%2$d</string>
+    <string name="areaIntro_titleText">@string/nav_tab_area_intro</string>
+    <string name="map_titleText">@string/nav_tab_map</string>
+
+    <string name="area_category_outside">戶外區</string>
+    <string name="area_category_inside">室內區</string>
+</resources>

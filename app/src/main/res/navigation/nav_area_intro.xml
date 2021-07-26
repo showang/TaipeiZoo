@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/areaIntroFragment"
+    android:id="@+id/nav_area_intro">
+
+    <fragment
+        android:id="@+id/areaIntroFragment"
+        android:name="me.showang.taipeizoo.fragment.AreaIntroFragment"
+        android:label="@string/nav_tab_area_intro"
+        tools:layout="@layout/fragment_area_list">
+        <action
+            android:id="@+id/action_area_detail"
+            app:destination="@id/areaDetailFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/nav_do_nothing"
+            app:popEnterAnim="@anim/nav_do_nothing"
+            app:popExitAnim="@anim/slide_out_right" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/areaDetailFragment"
+        android:name="me.showang.taipeizoo.fragment.AreaDetailFragment"
+        tools:layout="@layout/fragment_area_detail">
+
+        <action
+            android:id="@+id/action_plant_detail"
+            app:destination="@id/plantDetailFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/nav_do_nothing"
+            app:popEnterAnim="@anim/nav_do_nothing"
+            app:popExitAnim="@anim/slide_out_right" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/plantDetailFragment"
+        android:name="me.showang.taipeizoo.fragment.PlantDetailFragment" />
+
+</navigation>
