@@ -17,6 +17,7 @@ import me.showang.recyct.items.RecyctItemBase
 import me.showang.taipeizoo.R
 import me.showang.taipeizoo.databinding.FragmentAreaListBinding
 import me.showang.taipeizoo.model.AreaInfo
+import me.showang.taipeizoo.utils.NavControllerHelper
 import me.showang.taipeizoo.viewmodel.AreaIntroViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -25,7 +26,7 @@ class AreaIntroFragment : Fragment() {
     private val outsideList = mutableListOf<AreaInfo>()
     private val insideList = mutableListOf<AreaInfo>()
     private val viewModel: AreaIntroViewModel by viewModel()
-
+    private val navControllerHelper = NavControllerHelper()
     private var binding: FragmentAreaListBinding? = null
     private var adapter: RecyctAdapter? = null
     private val categoryList: List<String> by lazy {
@@ -49,13 +50,18 @@ class AreaIntroFragment : Fragment() {
             outsideList.clear()
             insideList.clear()
             it.forEach { area ->
-                when(area.category) {
+                when (area.category) {
                     categoryList[0] -> outsideList.add(area)
                     categoryList[1] -> insideList.add(area)
                 }
             }
             adapter?.notifyDataSetChanged()
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        navControllerHelper.onResume()
     }
 
     override fun onDestroyView() {
@@ -70,8 +76,10 @@ class AreaIntroFragment : Fragment() {
             sectionsByGroup(SectionTitleItem(), categoryList)
             register(AreaInfoItem()) { data, _ ->
                 when (data) {
-                    is AreaInfo -> findNavController().navigate(
-                        R.id.action_area_detail, Bundle().apply {
+                    is AreaInfo -> navControllerHelper.navigate(
+                        findNavController(),
+                        R.id.action_area_detail,
+                        Bundle().apply {
                             putSerializable(AreaDetailFragment.INPUT_AREA_INFO, data)
                         })
                 }

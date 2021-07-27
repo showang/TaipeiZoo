@@ -26,6 +26,7 @@ import me.showang.taipeizoo.R
 import me.showang.taipeizoo.databinding.FragmentAreaDetailBinding
 import me.showang.taipeizoo.model.AreaInfo
 import me.showang.taipeizoo.model.PlantInfo
+import me.showang.taipeizoo.utils.NavControllerHelper
 import me.showang.taipeizoo.viewmodel.AreaDetailViewModel
 import me.showang.taipeizoo.viewmodel.AreaDetailViewModel.Event
 import me.showang.taipeizoo.viewmodel.AreaDetailViewModel.State
@@ -43,6 +44,7 @@ class AreaDetailFragment : Fragment() {
     }
     private val plantInfoList: MutableList<PlantInfo> = mutableListOf()
     private val viewModel: AreaDetailViewModel by viewModel()
+    private val navControllerHelper = NavControllerHelper()
     private var binding: FragmentAreaDetailBinding? = null
     private var adapter: RecyctAdapter? = null
     private var lastOffset: Int = 0
@@ -63,6 +65,11 @@ class AreaDetailFragment : Fragment() {
             initRecyclerView()
         }
         viewModel.observeTransformation({ lifecycle }, ::initViewByState, ::updateViewByTransform)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        navControllerHelper.onResume()
     }
 
     override fun onDestroyView() {
@@ -129,7 +136,7 @@ class AreaDetailFragment : Fragment() {
         recycler.adapter = RecyctAdapter(plantInfoList).apply {
             register(PlantInfoItem()) { data, _ ->
                 (data as? PlantInfo)?.let {
-                    findNavController().navigate(R.id.action_plant_detail, Bundle().apply {
+                    navControllerHelper.navigate(findNavController(), R.id.action_plant_detail, Bundle().apply {
                         putSerializable(PlantDetailFragment.INPUT_PLANT_INFO, it)
                     })
                 }
